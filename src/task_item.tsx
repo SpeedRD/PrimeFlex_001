@@ -1,7 +1,7 @@
 import React from 'react';
 import { Checkbox } from 'primereact/checkbox';
 import { Button } from 'primereact/button';
-import type { Task } from './types'; // <-- CORRECCIÓN: Añadido 'type'
+import type { Task } from './types'; 
 
 interface TaskItemProps {
     task: Task;

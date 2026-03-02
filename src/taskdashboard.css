@@ -14,7 +14,7 @@
     }
 }
 
-/* Ajuste específico para el contenedor de la lista si crece mucho */
+/* Ajuste específico para el contenedor de la lista */
 .task-list-container {
     max-height: 60vh;
     overflow-y: auto;

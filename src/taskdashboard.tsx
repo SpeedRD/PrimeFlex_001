@@ -2,9 +2,11 @@ import React, { useReducer, useState } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
-import { TaskItem } from './task_item'; // <-- CORRECCIÓN: Nombre exacto del archivo
-import type { Task, TaskAction } from './types'; // <-- CORRECCIÓN: Añadido 'type'
-import './taskdashboard.css'; // <-- CORRECCIÓN: Nombre exacto del archivo
+import { TaskItem } from './task_item'; 
+import type { Task, TaskAction } from './types'; 
+import './taskdashboard.css';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 
 const taskReducer = (state: Task[], action: TaskAction): Task[] => {
     switch (action.type) {
@@ -45,16 +47,16 @@ export const TaskDashboard: React.FC = () => {
 
                     {/* Formulario de entrada */}
                     <div className="flex gap-2">
-                        <div className="p-input-icon-left flex-grow-1">
-                            <i className="pi pi-check-square" />
+                        <IconField iconPosition="left" className="flex-grow-1">
+                            <InputIcon className="pi pi-check-square" />
                             <InputText 
                                 value={inputValue} 
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)} /* <-- CORRECCIÓN: Tipado */
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)} 
                                 placeholder="Añadir nueva tarea..." 
                                 className="w-full"
-                                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleAddTask()} /* <-- CORRECCIÓN: Tipado */
+                                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleAddTask()} 
                             />
-                        </div>
+                        </IconField>
                         <Button icon="pi pi-plus" label="Añadir" onClick={handleAddTask} className="p-button-primary" />
                     </div>
 
@@ -69,8 +71,8 @@ export const TaskDashboard: React.FC = () => {
                                 <TaskItem 
                                     key={task.id} 
                                     task={task} 
-                                    onToggle={(id: string) => dispatch({ type: 'TOGGLE_TASK', payload: id })} /* <-- CORRECCIÓN: Tipado */
-                                    onDelete={(id: string) => dispatch({ type: 'DELETE_TASK', payload: id })} /* <-- CORRECCIÓN: Tipado */
+                                    onToggle={(id: string) => dispatch({ type: 'TOGGLE_TASK', payload: id })} 
+                                    onDelete={(id: string) => dispatch({ type: 'DELETE_TASK', payload: id })} 
                                 />
                             ))
                         )}
