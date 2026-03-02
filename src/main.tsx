@@ -1,10 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { PrimeReactProvider } from 'primereact/api';
+import './index.css';
+import App from './App.tsx';
+
+// --- ESTOS SON LOS ESTILOS DE PRIMEREACT Y PRIMEFLEX ---
+import 'primereact/resources/themes/lara-light-indigo/theme.css'; 
+import 'primereact/resources/primereact.min.css';                 
+import 'primeicons/primeicons.css';                               
+import 'primeflex/primeflex.css';                                 
+// --------------------------------------------------------
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <PrimeReactProvider>
+        <App />
+    </PrimeReactProvider>
   </StrictMode>,
 )
