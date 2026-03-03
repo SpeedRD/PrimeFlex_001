@@ -10,10 +10,17 @@ interface TaskInputProps {
     onAddTask: () => void;
 }
 
-// Componente Dummy: solo depende de sus props para el formulario de entrada
+// Componente Dummy: formulario controlado mediante props
 export const TaskInput: React.FC<TaskInputProps> = ({ inputValue, onInputChange, onAddTask }) => {
+
+    // Manejar el submit del formulario, prevenir recarga de página
+    const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
+        e.preventDefault();
+        onAddTask();
+    };
+
     return (
-        <div className="flex gap-2">
+        <form onSubmit={handleSubmit} className="flex gap-2">
             <IconField iconPosition="left" className="flex-grow-1">
                 <InputIcon className="pi pi-check-square" />
                 <InputText 
@@ -21,10 +28,10 @@ export const TaskInput: React.FC<TaskInputProps> = ({ inputValue, onInputChange,
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInputChange(e.target.value)} 
                     placeholder="Añadir nueva tarea..." 
                     className="w-full"
-                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && onAddTask()} 
                 />
             </IconField>
-            <Button icon="pi pi-plus" label="Añadir" onClick={onAddTask} className="p-button-primary" />
-        </div>
+            {/* type="submit" hace que el botón dispare el onSubmit del form */}
+            <Button type="submit" icon="pi pi-plus" label="Añadir" className="p-button-primary" />
+        </form>
     );
 };
