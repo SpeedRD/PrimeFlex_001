@@ -14,12 +14,15 @@ interface DashboardState {
     inputValue: string;
 }
 
+// Función inicializadora del estado (se ejecuta solo en el primer render)
+const createInitialState = (): DashboardState => ({
+    tasks: [],
+    inputValue: '',
+});
+
 export const TaskDashboard: React.FC = () => {
-    // Un solo useState para manejar todo el estado de la vista
-    const [state, setState] = useState<DashboardState>({
-        tasks: [],
-        inputValue: '',
-    });
+    // Un solo useState con función callback para inicializar
+    const [state, setState] = useState<DashboardState>(createInitialState);
 
     // Añadir tarea y limpiar el input en una sola actualización de estado
     const handleAddTask = () => {
