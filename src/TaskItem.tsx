@@ -9,6 +9,7 @@ interface TaskItemProps {
     onDelete: (id: string) => void;
 }
 
+// Componente Dummy: recibe un task
 export const TaskItem: React.FC<TaskItemProps> = ({ task, onToggle, onDelete }) => {
     return (
         <div className="task-item-enter flex align-items-center justify-content-between p-3 surface-card shadow-1 border-round mb-2 transition-colors transition-duration-200 hover:surface-hover">

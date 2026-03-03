@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
-import { TaskItem } from './TaskItem'; 
-import type { Task } from './Types'; 
+import { TaskHeader } from './TaskHeader';
+import { TaskInput } from './TaskInput';
+import { TaskList } from './TaskList';
+import type { Task } from './Types';
 import './taskdashboard.css';
-import { IconField } from 'primereact/iconfield';
-import { InputIcon } from 'primereact/inputicon';
 
 // Estado unificado de la vista en una sola interfaz
 interface DashboardState {
@@ -20,6 +18,7 @@ const createInitialState = (): DashboardState => ({
     inputValue: '',
 });
 
+// Componente Smart: contiene toda la lógica y el estado, orquesta los componentes Dummy
 export const TaskDashboard: React.FC = () => {
     // Un solo useState con función callback para inicializar
     const [state, setState] = useState<DashboardState>(createInitialState);
@@ -33,6 +32,11 @@ export const TaskDashboard: React.FC = () => {
                 inputValue: '',
             }));
         }
+    };
+
+    // Actualizar el valor del input
+    const handleInputChange = (value: string) => {
+        setState(prev => ({ ...prev, inputValue: value }));
     };
 
     // Alternar el estado completado de una tarea
@@ -57,45 +61,21 @@ export const TaskDashboard: React.FC = () => {
                 <div className="flex flex-column gap-4">
                     
                     {/* Cabecera */}
-                    <div className="flex align-items-center justify-content-between border-bottom-1 surface-border pb-2">
-                        <h2 className="m-0 text-900 font-semibold text-2xl">Gestor de Operaciones</h2>
-                        <span className="bg-primary text-primary-contrast font-medium px-3 py-1 border-round-2xl text-sm">
-                            {state.tasks.length} {state.tasks.length === 1 ? 'tarea' : 'tareas'}
-                        </span>
-                    </div>
+                    <TaskHeader taskCount={state.tasks.length} />
 
                     {/* Formulario de entrada */}
-                    <div className="flex gap-2">
-                        <IconField iconPosition="left" className="flex-grow-1">
-                            <InputIcon className="pi pi-check-square" />
-                            <InputText 
-                                value={state.inputValue} 
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setState(prev => ({ ...prev, inputValue: e.target.value }))} 
-                                placeholder="Añadir nueva tarea..." 
-                                className="w-full"
-                                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleAddTask()} 
-                            />
-                        </IconField>
-                        <Button icon="pi pi-plus" label="Añadir" onClick={handleAddTask} className="p-button-primary" />
-                    </div>
+                    <TaskInput 
+                        inputValue={state.inputValue} 
+                        onInputChange={handleInputChange} 
+                        onAddTask={handleAddTask} 
+                    />
 
                     {/* Lista de tareas */}
-                    <div className="task-list-container flex flex-column mt-2 pr-2">
-                        {state.tasks.length === 0 ? (
-                            <div className="text-center text-500 font-italic py-4">
-                                No hay tareas pendientes.
-                            </div>
-                        ) : (
-                            state.tasks.map(task => (
-                                <TaskItem 
-                                    key={task.id} 
-                                    task={task} 
-                                    onToggle={handleToggleTask} 
-                                    onDelete={handleDeleteTask} 
-                                />
-                            ))
-                        )}
-                    </div>
+                    <TaskList 
+                        tasks={state.tasks} 
+                        onToggle={handleToggleTask} 
+                        onDelete={handleDeleteTask} 
+                    />
 
                 </div>
             </Card>
