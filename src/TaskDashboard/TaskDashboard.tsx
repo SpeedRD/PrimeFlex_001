@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Card } from 'primereact/card';
-import { TaskHeader } from './TaskHeader';
-import { TaskInput } from './TaskInput';
-import { TaskList } from './TaskList';
+import { TaskHeader } from './TaskHeader/TaskHeader';
+import { TaskInput } from './TaskInput/TaskInput';
+import { TaskList } from './TaskList/TaskList';
 import type { Task } from './Types';
-import './taskdashboard.css';
+import './TaskDashboard.css';
 
 // Estado unificado de la vista en una sola interfaz
 interface DashboardState {

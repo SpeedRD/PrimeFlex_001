@@ -1,7 +1,7 @@
 import React from 'react';
 import { Checkbox } from 'primereact/checkbox';
 import { Button } from 'primereact/button';
-import type { Task } from './Types'; 
+import type { Task } from '../../Types';
 
 interface TaskItemProps {
     task: Task;
@@ -9,7 +9,7 @@ interface TaskItemProps {
     onDelete: (id: string) => void;
 }
 
-// Componente Dummy: recibe un task
+// Componente Dummy: solo depende de sus props para renderizar una tarea
 export const TaskItem: React.FC<TaskItemProps> = ({ task, onToggle, onDelete }) => {
     return (
         <div className="task-item-enter flex align-items-center justify-content-between p-3 surface-card shadow-1 border-round mb-2 transition-colors transition-duration-200 hover:surface-hover">
