@@ -1,23 +1,24 @@
 import React from 'react';
 import { Checkbox } from 'primereact/checkbox';
 import { Button } from 'primereact/button';
+import { useTaskContext } from '../../TaskContext';
 import type { Task } from '../../Types';
 
 interface TaskItemProps {
     task: Task;
-    onToggle: (id: string) => void;
-    onDelete: (id: string) => void;
 }
 
-// Componente Dummy: solo depende de sus props para renderizar una tarea
-export const TaskItem: React.FC<TaskItemProps> = ({ task, onToggle, onDelete }) => {
+// Componente Dummy: recibe la tarea por prop y las acciones del contexto
+export const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
+    const { onToggleTask, onDeleteTask } = useTaskContext();
+
     return (
         <div className="task-item-enter flex align-items-center justify-content-between p-3 surface-card shadow-1 border-round mb-2 transition-colors transition-duration-200 hover:surface-hover">
             <div className="flex align-items-center gap-3">
                 <Checkbox 
                     inputId={task.id}
                     checked={task.completed} 
-                    onChange={() => onToggle(task.id)} 
+                    onChange={() => onToggleTask(task.id)} 
                 />
                 <label 
                     htmlFor={task.id} 
@@ -32,7 +33,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onToggle, onDelete }) 
                 text 
                 rounded 
                 aria-label="Eliminar tarea" 
-                onClick={() => onDelete(task.id)}
+                onClick={() => onDeleteTask(task.id)}
             />
         </div>
     );

@@ -3,15 +3,11 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
+import { useTaskContext } from '../TaskContext';
 
-interface TaskInputProps {
-    inputValue: string;
-    onInputChange: (value: string) => void;
-    onAddTask: () => void;
-}
-
-// Componente Dummy: formulario controlado mediante props
-export const TaskInput: React.FC<TaskInputProps> = ({ inputValue, onInputChange, onAddTask }) => {
+// Componente Dummy: consume del contexto en vez de recibir props
+export const TaskInput: React.FC = () => {
+    const { inputValue, onInputChange, onAddTask } = useTaskContext();
 
     // Manejar el submit del formulario, prevenir recarga de página
     const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {

@@ -3,6 +3,7 @@ import { Card } from 'primereact/card';
 import { TaskHeader } from './TaskHeader/TaskHeader';
 import { TaskInput } from './TaskInput/TaskInput';
 import { TaskList } from './TaskList/TaskList';
+import { TaskContext } from './TaskContext';
 import type { Task } from './Types';
 import './TaskDashboard.css';
 
@@ -18,7 +19,7 @@ const createInitialState = (): DashboardState => ({
     inputValue: '',
 });
 
-// Componente Smart: contiene toda la lógica y el estado, orquesta los componentes Dummy
+// Componente Smart: contiene toda la lógica y provee el contexto a los Dummy
 export const TaskDashboard: React.FC = () => {
     // Un solo useState con función callback para inicializar
     const [state, setState] = useState<DashboardState>(createInitialState);
@@ -55,30 +56,31 @@ export const TaskDashboard: React.FC = () => {
         }));
     };
 
+    // Valor del contexto que se comparte con todos los hijos
+    const contextValue = {
+        tasks: state.tasks,
+        inputValue: state.inputValue,
+        onAddTask: handleAddTask,
+        onInputChange: handleInputChange,
+        onToggleTask: handleToggleTask,
+        onDeleteTask: handleDeleteTask,
+    };
+
     return (
-        <div className="flex justify-content-center align-items-center min-h-screen surface-ground p-4">
-            <Card className="w-full md:w-8 lg:w-6 shadow-4 border-round-xl">
-                <div className="flex flex-column gap-4">
-                    
-                    {/* Cabecera */}
-                    <TaskHeader taskCount={state.tasks.length} />
+        // El Provider envuelve todo y hace accesible el contexto a cualquier hijo
+        <TaskContext.Provider value={contextValue}>
+            <div className="flex justify-content-center align-items-center min-h-screen surface-ground p-4">
+                <Card className="w-full md:w-8 lg:w-6 shadow-4 border-round-xl">
+                    <div className="flex flex-column gap-4">
+                        
+                        {/* Los componentes Dummy ya no reciben props, consumen del contexto */}
+                        <TaskHeader />
+                        <TaskInput />
+                        <TaskList />
 
-                    {/* Formulario de entrada */}
-                    <TaskInput 
-                        inputValue={state.inputValue} 
-                        onInputChange={handleInputChange} 
-                        onAddTask={handleAddTask} 
-                    />
-
-                    {/* Lista de tareas */}
-                    <TaskList 
-                        tasks={state.tasks} 
-                        onToggle={handleToggleTask} 
-                        onDelete={handleDeleteTask} 
-                    />
-
-                </div>
-            </Card>
-        </div>
+                    </div>
+                </Card>
+            </div>
+        </TaskContext.Provider>
     );
 };

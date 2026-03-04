@@ -1,15 +1,11 @@
 import React from 'react';
 import { TaskItem } from './TaskItem/TaskItem';
-import type { Task } from '../Types';
+import { useTaskContext } from '../TaskContext';
 
-interface TaskListProps {
-    tasks: Task[];
-    onToggle: (id: string) => void;
-    onDelete: (id: string) => void;
-}
+// Componente Dummy: consume del contexto en vez de recibir props
+export const TaskList: React.FC = () => {
+    const { tasks } = useTaskContext();
 
-// Componente Dummy: solo depende de sus props para renderizar la lista
-export const TaskList: React.FC<TaskListProps> = ({ tasks, onToggle, onDelete }) => {
     return (
         <div className="task-list-container flex flex-column mt-2 pr-2">
             {tasks.length === 0 ? (
@@ -18,12 +14,7 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onToggle, onDelete })
                 </div>
             ) : (
                 tasks.map(task => (
-                    <TaskItem 
-                        key={task.id} 
-                        task={task} 
-                        onToggle={onToggle} 
-                        onDelete={onDelete} 
-                    />
+                    <TaskItem key={task.id} task={task} />
                 ))
             )}
         </div>

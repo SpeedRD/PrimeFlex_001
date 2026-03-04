@@ -1,4 +1,4 @@
-import { TaskDashboard } from './TaskDashboard';
+import { TaskDashboard } from './TaskDashboard/TaskDashboard';
 
 function App() {
   return (
