@@ -1,15 +1,16 @@
 import React from 'react';
 import { TaskItem } from './TaskItem/TaskItem';
 import { useTaskContext } from '../TaskContext';
+import styles from './TaskList.module.scss';
 
 // Componente Dummy: consume del contexto en vez de recibir props
 export const TaskList: React.FC = () => {
     const { tasks } = useTaskContext();
 
     return (
-        <div className="task-list-container flex flex-column mt-2 pr-2">
+        <div className={styles["task-list"]}>
             {tasks.length === 0 ? (
-                <div className="text-center text-500 font-italic py-4">
+                <div className={styles["task-list__empty"]}>
                     No hay tareas pendientes.
                 </div>
             ) : (

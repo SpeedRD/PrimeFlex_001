@@ -1,0 +1,63 @@
+// Bloque: formulario de entrada
+.task-input {
+    display: flex;
+    gap: 0.5rem;
+
+    // Elemento: contenedor del campo de texto con icono
+    &__field {
+        flex: 1;
+        position: relative;
+    }
+
+    // Elemento: icono dentro del campo
+    &__icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        font-size: 1rem;
+        pointer-events: none;
+    }
+
+    // Elemento: campo de texto
+    &__text {
+        width: 100%;
+        padding: 0.625rem 0.75rem 0.625rem 2.5rem;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.2s;
+        box-sizing: border-box;
+
+        &:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+        }
+
+        &::placeholder {
+            color: #9ca3af;
+        }
+    }
+
+    // Elemento: botón de añadir
+    &__button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.625rem 1.25rem;
+        background-color: #6366f1;
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: #4f46e5;
+        }
+    }
+}

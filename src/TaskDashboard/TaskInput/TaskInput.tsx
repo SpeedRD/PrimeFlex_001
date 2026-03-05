@@ -1,9 +1,6 @@
 import React from 'react';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { IconField } from 'primereact/iconfield';
-import { InputIcon } from 'primereact/inputicon';
 import { useTaskContext } from '../TaskContext';
+import styles from './TaskInput.module.scss';
 
 // Componente Dummy: consume del contexto en vez de recibir props
 export const TaskInput: React.FC = () => {
@@ -16,18 +13,21 @@ export const TaskInput: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex gap-2">
-            <IconField iconPosition="left" className="flex-grow-1">
-                <InputIcon className="pi pi-check-square" />
-                <InputText 
+        <form onSubmit={handleSubmit} className={styles["task-input"]}>
+            <div className={styles["task-input__field"]}>
+                <i className={`pi pi-check-square ${styles["task-input__icon"]}`} />
+                <input 
+                    type="text"
                     value={inputValue} 
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInputChange(e.target.value)} 
+                    onChange={(e) => onInputChange(e.target.value)} 
                     placeholder="Añadir nueva tarea..." 
-                    className="w-full"
+                    className={styles["task-input__text"]}
                 />
-            </IconField>
-            {/* type="submit" hace que el botón dispare el onSubmit del form */}
-            <Button type="submit" icon="pi pi-plus" label="Añadir" className="p-button-primary" />
+            </div>
+            <button type="submit" className={styles["task-input__button"]}>
+                <i className="pi pi-plus" />
+                Añadir
+            </button>
         </form>
     );
 };

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Card } from 'primereact/card';
 import { TaskHeader } from './TaskHeader/TaskHeader';
 import { TaskInput } from './TaskInput/TaskInput';
 import { TaskList } from './TaskList/TaskList';
 import { TaskContext } from './TaskContext';
 import type { Task } from './Types';
-import './TaskDashboard.css';
+import styles from './TaskDashboard.module.scss';
 
 // Estado unificado de la vista en una sola interfaz
 interface DashboardState {
@@ -67,19 +66,17 @@ export const TaskDashboard: React.FC = () => {
     };
 
     return (
-        // El Provider envuelve todo y hace accesible el contexto a cualquier hijo
         <TaskContext.Provider value={contextValue}>
-            <div className="flex justify-content-center align-items-center min-h-screen surface-ground p-4">
-                <Card className="w-full md:w-8 lg:w-6 shadow-4 border-round-xl">
-                    <div className="flex flex-column gap-4">
-                        
-                        {/* Los componentes Dummy ya no reciben props, consumen del contexto */}
+            <div className={styles["task-dashboard"]}>
+                <div className={styles["task-dashboard__card"]}>
+                    <div className={styles["task-dashboard__content"]}>
+
                         <TaskHeader />
                         <TaskInput />
                         <TaskList />
 
                     </div>
-                </Card>
+                </div>
             </div>
         </TaskContext.Provider>
     );

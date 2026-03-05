@@ -1,0 +1,26 @@
+// Bloque: cabecera del dashboard
+.task-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 0.75rem;
+
+    // Elemento: título principal
+    &__title {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1e1e1e;
+    }
+
+    // Elemento: badge contador de tareas
+    &__badge {
+        background-color: #6366f1;
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 0.875rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+    }
+}

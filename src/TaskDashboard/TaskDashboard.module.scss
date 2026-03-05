@@ -1,0 +1,26 @@
+// Bloque principal del dashboard
+.task-dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    padding: 1rem;
+
+    // Elemento: contenedor de la tarjeta
+    &__card {
+        width: 100%;
+        max-width: 600px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+    }
+
+    // Elemento: contenido interior de la tarjeta
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}

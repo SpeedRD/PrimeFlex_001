@@ -1,0 +1,17 @@
+// Bloque: contenedor de la lista de tareas
+.task-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+    padding-right: 0.5rem;
+    max-height: 60vh;
+    overflow-y: auto;
+
+    // Elemento: mensaje cuando no hay tareas
+    &__empty {
+        text-align: center;
+        color: #9ca3af;
+        font-style: italic;
+        padding: 1.5rem 0;
+    }
+}
