@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useTaskContext } from '../../TaskContext';
 import type { Task } from '../../Types';
 import styles from './TaskItem.module.scss';
@@ -29,14 +30,20 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
                     {task.description}
                 </label>
             </div>
-            <button
-                type="button"
-                className={styles["task-item__delete"]}
-                aria-label="Eliminar tarea"
-                onClick={() => onDeleteTask(task.id)}
-            >
-                <i className="pi pi-trash" />
-            </button>
+            <div className={styles["task-item__actions"]}>
+                {/* Link a la vista de detalle */}
+                <Link to={`/dashboard/${task.id}`} className={styles["task-item__detail"]}>
+                    <i className="pi pi-eye" />
+                </Link>
+                <button
+                    type="button"
+                    className={styles["task-item__delete"]}
+                    aria-label="Eliminar tarea"
+                    onClick={() => onDeleteTask(task.id)}
+                >
+                    <i className="pi pi-trash" />
+                </button>
+            </div>
         </div>
     );
 };

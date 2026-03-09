@@ -1,0 +1,18 @@
+.myLayout{
+    background-color: green;
+    
+    // Estilos de una tablet
+    @media only screen and (min-width: 768) {
+    background-color: yellow;
+    }
+
+    // Estilos ordenador
+     @media only screen and (min-width: 1440) {
+    background-color: red;
+    }
+
+    // Estilos ordenador xl
+     @media only screen and (min-width: 1920) {
+    background-color: pink;
+    }
+}

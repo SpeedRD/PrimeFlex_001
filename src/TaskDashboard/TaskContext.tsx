@@ -9,6 +9,7 @@ interface TaskContextType {
     onInputChange: (value: string) => void;
     onToggleTask: (id: string) => void;
     onDeleteTask: (id: string) => void;
+    getTaskById: (id: string) => Task | undefined;
 }
 
 // Crear el contexto con valor inicial null
@@ -62,7 +63,11 @@ export const TaskContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         }));
     };
 
-    // Valor del contexto que se comparte con todos los hijos
+    // Buscar una tarea por su id (para la vista de detalle)
+    const getTaskById = (id: string): Task | undefined => {
+        return state.tasks.find(t => t.id === id);
+    };
+
     const contextValue: TaskContextType = {
         tasks: state.tasks,
         inputValue: state.inputValue,
@@ -70,6 +75,7 @@ export const TaskContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         onInputChange: handleInputChange,
         onToggleTask: handleToggleTask,
         onDeleteTask: handleDeleteTask,
+        getTaskById,
     };
 
     return (
