@@ -20,7 +20,7 @@ interface TaskContextType {
 }
 
 // Crear el contexto con valor inicial null
-const TaskContext = createContext<TaskContextType | null>(null);
+export const TaskContext = createContext<TaskContextType | null>(null);
 
 // Estado unificado de la vista
 interface DashboardState {
